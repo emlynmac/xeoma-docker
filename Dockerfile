@@ -9,7 +9,7 @@ CMD ["/sbin/my_init"]
 RUN apt-get update && apt-get -y upgrade && \
 	apt-get install -y libasound2
 # Grab latest 64bit and install
-RUN curl -o /root/xeoma_linux64.tgz http://felenasoft.com/xeoma/downloads/xeoma_linux64.tgz && \
+RUN curl -o /root/xeoma_linux64.tgz http://felenasoft.com/xeoma/downloads/xeoma_previous_versions/?get=xeoma_linux64_16.4.8.tgz&x=22&y=8 && \
 	tar -xvzf /root/xeoma_linux64.tgz -C /root && \
 	/root/xeoma.app -install -allmanual && \
 	rm /root/xeoma_linux64.tgz
