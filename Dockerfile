@@ -1,31 +1,30 @@
-# Use phusion/baseimage as base image.
+# phusion/baseimage as FROM image.
 FROM phusion/baseimage:0.9.18
-MAINTAINER Marcus Collier "dev@mjcollier.id.au"
+MAINTAINER Joe Knight <"japayton42@gmail.com">
 
-# Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
-# Install prerequisites
+# Install libasound2 so we can have audio from cameras.
 RUN apt-get update && apt-get -y upgrade && \
 	apt-get install -y libasound2
-# Grab latest 64bit and install
- RUN curl -o /root/xeoma_linux64.tgz http://felenasoft.com/xeoma/downloads/xeoma_linux64.tgz && \
-	tar -xvzf /root/xeoma_linux64.tgz -C /root && \
-	/root/xeoma.app -install -allmanual && \
-	rm /root/xeoma_linux64.tgz
-
-# Set up the force first run
-RUN touch /root/firstrun
+	
+# Download and configure the latest release
+ RUN curl -o /root/xeoma_linux64.tgz http://felenasoft.com/xeoma/downloads/xeoma_linux64.tgz
+ RUN tar -xvzf /root/xeoma_linux64.tgz -C /root
+ RUN /root/xeoma.app -install -allmanual
+ RUN rm /root/xeoma_linux64.tgz
+ RUN touch /root/firstrun
 
 # Set up start up scripts
-RUN mkdir /etc/service/xeoma
-ADD xeoma.sh /etc/service/xeoma/run
-RUN chmod +x /etc/service/xeoma/run
+ RUN mkdir /etc/service/xeoma
+ RUN curl -o /etc/service/xeoma/run/xeoma.sh https://raw.githubusercontent.com/jknight2014/xeoma-docker/master/xeoma.sh
+ RUN chmod +x /etc/service/xeoma/run
 
-VOLUME /usr/local/Xeoma
+ VOLUME /usr/local/Xeoma
 
 # Clean up APT when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ RUN apt-get clean
+ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Expose the port
-EXPOSE 8090
+# Expose Xeomas remote access port. 
+ EXPOSE 8090
