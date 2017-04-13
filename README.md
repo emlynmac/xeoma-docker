@@ -5,17 +5,17 @@ Run Xeoma with Docker
 Xeoma (Security Monitoring Software) developed by Felena Soft http://felenasoft.com/, running in a Docker.
 
 ### EULA
-Make sure you read this - http://felenasoft.com/xeoma/en/eula/ as you are effectively agreeing to it by running this docker.
+Make sure you read this - http://felenasoft.com/xeoma/en/eula/.
 
 ### Getting the Docker
 From Docker Index
 ```
-docker pull jedimonkey/xeoma
+docker pull jknight2014/xeoma
 ```
 
 Build yourself
 ```
-git clone https://github.com/jedimonkey/xeoma-docker.git
+git clone https://github.com/jknight2014/xeoma-docker.git
 docker build --rm -t <your-docker-name>/xeoma xeoma-docker
 ```
 
