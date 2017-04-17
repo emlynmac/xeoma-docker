@@ -11,7 +11,7 @@ RUN apt-get update && apt-get -y upgrade && \
 # Download and configure the latest release
  RUN curl -o /root/xeoma_linux64.tgz http://felenasoft.com/xeoma/downloads/xeoma_linux64.tgz
  RUN tar -xvzf /root/xeoma_linux64.tgz -C /root
- RUN /root/xeoma.app -install -allmanual
+ RUN /root/xeoma.app -install -hiddenmode
  RUN rm /root/xeoma_linux64.tgz
  RUN touch /root/firstrun
 
