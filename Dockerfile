@@ -16,7 +16,7 @@ RUN apt-get update && apt-get -y upgrade && \
  RUN touch /root/firstrun
 
 # Set up start up scripts
- RUN mkdir /etc/service/xeoma
+ RUN mkdir -p /etc/service/xeoma/run
  RUN curl -o /etc/service/xeoma/run/xeoma.sh https://raw.githubusercontent.com/jknight2014/xeoma-docker/master/xeoma.sh
  RUN chmod +x /etc/service/xeoma/run
 
